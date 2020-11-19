@@ -16,7 +16,9 @@ public class Cliente {
 			while(!msg.equalsIgnoreCase(".")) {
 				System.out.println("Escribe un mensaje");
 				msg= sc.nextLine();
-			
+				if(msg.equalsIgnoreCase(".")) {
+					break;
+				}
 			
 			Socket misocket = new Socket(IP,PUERTO);
 			BufferedReader lectura ;

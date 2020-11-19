@@ -23,12 +23,6 @@ final static int PUERTO = 6000;
 			lectura = new BufferedReader(new InputStreamReader(misocket.getInputStream()));
 			System.out.println("el cuadrado del elemento "+i+" es "+lectura.readLine());
 			
-			/*if(i==args.length-1) {
-			 PrintWriter escribir2 = new PrintWriter(new OutputStreamWriter(misocket.getOutputStream()),true);
-			  comprobar = false;
-			  escribir.println(comprobar);
-			  escribir2.close();
-			}*/
 			
 			misocket.close();
 			lectura.close();

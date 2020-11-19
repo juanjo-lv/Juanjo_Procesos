@@ -25,13 +25,7 @@ final static int PUERTO =6000;
 				
 				escribir = new PrintWriter(new OutputStreamWriter(cliente.getOutputStream()),true);
 				escribir.println(num);
-				/*
-				BufferedReader lectura2 = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
-				if(lectura.readLine().equalsIgnoreCase("false")){
-					 comprobar = false;
-				}
-				lectura2.close();
-				*/
+				
 				servidor.close();
 				lectura.close();
 				escribir.close();

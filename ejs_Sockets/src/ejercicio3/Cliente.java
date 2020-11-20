@@ -6,12 +6,12 @@ import java.util.*;
 public class Cliente {
 	final static String IP="localhost";
 	final static int PUERTO = 6000;
+	
 	public static String dameOperador(Scanner sc) {
 		String msg="";
 		do {
 			System.out.println("introduce un operador");
 			msg = sc.nextLine();
-		
 			if(!msg.equalsIgnoreCase("$") && !msg.equalsIgnoreCase("+") && !msg.equalsIgnoreCase("-") && !msg.equalsIgnoreCase("*") 
 			&& !msg.equalsIgnoreCase("/")) {
 				System.out.println("Operador no valido introduce uno de nuevo");
@@ -22,28 +22,37 @@ public class Cliente {
 			
 		}while(!msg.equalsIgnoreCase("$") && !msg.equalsIgnoreCase("+") && !msg.equalsIgnoreCase("-") && !msg.equalsIgnoreCase("*") 
 			&& !msg.equalsIgnoreCase("/"));
+		
 		return msg;
+	
 	}
+	
+	
 	public static int dameNum(Scanner sc) {
 		int num;
 		System.out.println("Introduce un numero");
 		num = sc.nextInt();
 		return num;
 	}
+	
+	
 	public static void main(String[] args) {
 		String msg="";
 		int num1,num2;
 		String op="";
 		Scanner sc = new Scanner(System.in);
-	try {	
-		Socket miSocket =new Socket(IP,PUERTO);
-		BufferedReader lectura;
-		PrintWriter escribir,escribir2,escribir3;
-		
-		
-		msg = dameOperador(sc);
-		
-		while(!msg.equalsIgnoreCase("$")) {
+	try {		
+		do {
+			
+			Socket miSocket =new Socket(IP,PUERTO);
+			BufferedReader lectura;
+			PrintWriter escribir;
+			
+			msg = dameOperador(sc);
+			System.out.println(msg);
+			if(!msg.equalsIgnoreCase("$")) {
+				
+			
 			num1 = dameNum(sc);
 		    num2 = dameNum(sc);
 		
@@ -61,12 +70,14 @@ public class Cliente {
 			op = lectura.readLine();
 			System.out.println("El resultado de la operación es: "+op);
 			
+			
 			lectura.close();
 			escribir.close();
-
-			miSocket.close();
 			
-		}
+			}
+			msg ="";
+			miSocket.close();
+		}while(!msg.equalsIgnoreCase("$"));
 		
 	} catch (UnknownHostException e) {
 		// TODO Auto-generated catch block

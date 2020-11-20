@@ -42,19 +42,20 @@ public class Cliente {
 		
 		
 		msg = dameOperador(sc);
+		
 		while(!msg.equalsIgnoreCase("$")) {
 			num1 = dameNum(sc);
 		    num2 = dameNum(sc);
 		
 			
 			escribir = new PrintWriter(new OutputStreamWriter(miSocket.getOutputStream()),true);
-			escribir.print(msg);
+			escribir.println(msg);
 			
-			escribir2 = new PrintWriter(new OutputStreamWriter(miSocket.getOutputStream()),true);
-			escribir2.print(num1);
 			
-			escribir3 = new PrintWriter(new OutputStreamWriter(miSocket.getOutputStream()),true);
-			escribir3.print(num2);
+			escribir.println(num1);
+			
+			
+			escribir.println(num2);
 			
 			lectura = new BufferedReader(new InputStreamReader(miSocket.getInputStream()));
 			op = lectura.readLine();
@@ -62,8 +63,7 @@ public class Cliente {
 			
 			lectura.close();
 			escribir.close();
-			escribir2.close();
-			escribir3.close();
+
 			miSocket.close();
 			
 		}

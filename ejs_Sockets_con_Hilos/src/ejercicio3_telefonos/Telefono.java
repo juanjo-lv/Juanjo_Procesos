@@ -11,30 +11,44 @@ public class Telefono {
 	public static void main(String[] args) {
 
 		String msg = " ", msg2 = " ";
-		BufferedReader entrada1;
+		BufferedReader entrada1,entrada2;
 		PrintWriter salida1, salida2;
 		ServerSocket servidor;
 		Socket cliente, cliente2;
 		try {
 			System.out.println("Abriendo server...");
 			servidor = new ServerSocket(PUERTO);
-
-			
+			System.out.println("SALA DE CHAT ENTRE CLIENTE 1 Y 2");
+			System.out.println("------------------------------");
 			while (!msg.equalsIgnoreCase("fin")) {
 				cliente = servidor.accept();
 				cliente2 = servidor.accept();
+			
+				
 				// Recibe el mensaje de cliente 1
 				entrada1 = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
 				msg = entrada1.readLine();
-				System.out.println(msg);
+				System.out.println("Cliente1: "+msg);
+				System.out.println("------------------");
+				// Recibe de cliente 2
+				entrada2 = new BufferedReader(new InputStreamReader(cliente2.getInputStream()));
+				msg2= entrada2.readLine();
+				System.out.println("Cliente2: "+msg2);
+				System.out.println("---------------");
 
 				// Envía el mensaje a cliente 2
-
+/*
 				salida2 = new PrintWriter(new OutputStreamWriter(cliente2.getOutputStream()), true);
 				salida2.write(msg);
 				
+				//Envía a 1
+				salida1 = new PrintWriter(new OutputStreamWriter(cliente.getOutputStream()), true);
+				salida1.write(msg);
+		*/		
 				entrada1.close();
-				salida2.close();
+				entrada2.close();
+			//	salida1.close();
+			//	salida2.close();
 				cliente.close();
 				cliente2.close();
 			}

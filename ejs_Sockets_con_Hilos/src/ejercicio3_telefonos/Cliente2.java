@@ -16,23 +16,30 @@ public class Cliente2 {
 		Scanner sc = new Scanner(System.in);
 		Socket miSocket;
 		try {
-			
-			while(true) {
+
+			while (true) {
 				miSocket = new Socket(IP, PUERTO);
-				entrada = new BufferedReader( new InputStreamReader(miSocket.getInputStream()));
-				msg=entrada.readLine();
+				
+				salida = new PrintWriter(new OutputStreamWriter(miSocket.getOutputStream()),true);
+				System.out.println("Envia un mensaje a 1");
+				msg=sc.nextLine();
+				salida.write(msg);
+				
+			/*	entrada = new BufferedReader(new InputStreamReader(miSocket.getInputStream()));
+				msg = entrada.readLine();
 				System.out.println(msg);
 				
-				entrada.close();
-				miSocket.close();
-				//Visualizar mensaje de 2
-			}
 
-				
-				
-				
+			*/	
 				
 			
+				
+				//entrada.close();
+				salida.close();
+				miSocket.close();
+				
+			}
+
 		} catch (UnknownHostException unknownHostExcept) {
 			System.err.println("->x Error en la operacion de socket!");
 		} catch (SocketException socketExcept) {

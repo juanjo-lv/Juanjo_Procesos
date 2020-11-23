@@ -10,7 +10,7 @@ public static final int PUERTO=5000;
 public static void main(String[] args) {
 	Scanner sc = new Scanner(System.in);
 	try {
-		String mensaje;
+		String mensaje,mensaje2;
 		BufferedReader lectura;
 		PrintWriter escribir;
 		
@@ -21,18 +21,21 @@ public static void main(String[] args) {
 			
 		//Recibir y visualizar el mensaje de 1
 		mensaje = lectura.readLine();
-		System.out.println(mensaje);
+		System.out.println("cliente 1: "+mensaje);
+		
+		if(!mensaje.equalsIgnoreCase("fin")) {
 		
 		//Enviar primer mensaje al servidor
-		System.out.println("Escribe un mensaje que quieras enviar");
-		mensaje = sc.nextLine();
+		System.out.println("a cliente 1:");
+		mensaje2 = sc.nextLine();
+		System.out.println("---------");
+		escribir.println(mensaje2);
 		
-		escribir.write(mensaje);
-		System.out.println("mensaje enviado");
-		
-		
-
-		}while(mensaje.equalsIgnoreCase("fin"));
+		}else {
+			System.out.println("el chat se ha terminado");
+		}
+	
+		}while(!mensaje.equalsIgnoreCase("fin"));
 		
 	} catch (UnknownHostException e) {
 		// TODO Auto-generated catch block

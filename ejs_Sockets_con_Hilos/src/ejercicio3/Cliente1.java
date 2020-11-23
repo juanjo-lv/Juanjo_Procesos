@@ -10,32 +10,34 @@ public static final int PUERTO = 5000;
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		try {
-			String mensaje="";
+			String mensaje="",mensaje2="";
 			BufferedReader lectura;
 			PrintWriter escribir;
 			
 			Socket miSocket = new Socket(IP,PUERTO);
 			
-			do {
 			escribir = new PrintWriter(new OutputStreamWriter(miSocket.getOutputStream()),true);	
-			lectura = new BufferedReader(new InputStreamReader(miSocket.getInputStream()));
-		
+			lectura = new BufferedReader(new InputStreamReader(miSocket.getInputStream()));		
+			do {
+				
 			//Enviar primer mensaje al servidor
-			System.out.println("Escribe un mensaje que quieras enviar, si pulsas FIN acaba la conversacion");
+			System.out.println("a Cliente 2:");
 			mensaje = sc.nextLine();
+			System.out.println("---------");
 			
 			escribir.println(mensaje);
 			
 			
 			//Recibir y visualizar el mensaje de 2
 			
-			mensaje = lectura.readLine();
-			System.out.println(mensaje);
+			System.out.println("cliente 2: "+lectura.readLine());
+			
+
+			
+			}while(!mensaje.equalsIgnoreCase("fin"));
 			
 			lectura.close();
 			escribir.close();
-			}while(!mensaje.equalsIgnoreCase("fin"));
-		
 			miSocket.close();
 			
 		} catch (UnknownHostException e) {

@@ -33,10 +33,11 @@ public static final int PUERTO =5000;
 			
 		do {
 			//recibir de 1
+			
 			mensaje1 = lectura1.readLine();
 			
 			
-		if(mensaje1.equalsIgnoreCase("fin")) {
+		if(!mensaje1.equalsIgnoreCase("fin")) {
 			//Enviamos la cadena a 2º cliente
 			
 			escribir1.println(mensaje1);
@@ -53,12 +54,13 @@ public static final int PUERTO =5000;
 			escribir1.println(mensaje1);
 		}
 			
-			cliente1.close();
-			cliente2.close();
+
 			
-		}while(mensaje1.equalsIgnoreCase("FIN"));
+		}while(!mensaje1.equalsIgnoreCase("FIN"));
 		
 			System.out.println("se cierra el server");
+			cliente1.close();
+			cliente2.close();
 			servidor.close();
 			
 		} catch (IOException e) {

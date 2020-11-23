@@ -15,6 +15,7 @@ public class Servidor {
 		
 		
 		System.out.println("Esperando la conexion de un cliente...");
+		
 	while(true){
 		Socket cliente = servidor.accept();
 		

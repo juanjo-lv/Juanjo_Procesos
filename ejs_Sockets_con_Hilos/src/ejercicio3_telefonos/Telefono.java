@@ -24,19 +24,20 @@ public class Telefono {
 			System.out.println("SERVIDOR DEL CHAT");
 			System.out.println("------------------------------");
 
-			// clientes
-			cliente = servidor.accept();
-			System.out.println("cliente 1 aceptado");
-			cliente2 = servidor.accept();
-			System.out.println("cliente 2 aceptado");
-
-			// buffers
-			entrada1 = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
-			salida1 = new PrintWriter(new OutputStreamWriter(cliente.getOutputStream()), true);
-			entrada2 = new BufferedReader(new InputStreamReader(cliente2.getInputStream()));
-			salida2 = new PrintWriter(new OutputStreamWriter(cliente2.getOutputStream()), true);
-
+			
+		
 			do {
+				// clientes
+				cliente = servidor.accept();
+				System.out.println("cliente 1 aceptado");
+				cliente2 = servidor.accept();
+				System.out.println("cliente 2 aceptado");
+
+				// buffers
+				entrada1 = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
+				salida1 = new PrintWriter(new OutputStreamWriter(cliente.getOutputStream()), true);
+				entrada2 = new BufferedReader(new InputStreamReader(cliente2.getInputStream()));
+				salida2 = new PrintWriter(new OutputStreamWriter(cliente2.getOutputStream()), true);
 
 				// Recibe el mensaje de cliente 1 y se la envia a cliente2
 
@@ -50,15 +51,16 @@ public class Telefono {
 				msg2 = entrada2.readLine();
 				salida1.write(msg2);
 				
+				entrada1.close();
+				entrada2.close();
+				salida1.close();
+				salida2.close();
+				cliente.close();
+				cliente2.close();
+
 
 			} while (!msg.equalsIgnoreCase("fin"));
 
-			entrada1.close();
-			entrada2.close();
-			salida1.close();
-			salida2.close();
-			cliente.close();
-			cliente2.close();
 
 		} catch (UnknownHostException unknownHostExcept) {
 			System.err.println("->x Error en la operacion de socket!");

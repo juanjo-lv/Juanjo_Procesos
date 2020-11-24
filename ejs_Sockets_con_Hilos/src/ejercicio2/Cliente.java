@@ -30,9 +30,12 @@ public class Cliente extends Thread {
 			dos = new DataOutputStream((miSocket.getOutputStream()));
 			dis = new DataInputStream (new FileInputStream(f)); 
 			
-			String texto = dis.readUTF();
+			/*String texto = dis.readUTF();
 			dos.writeUTF(texto);
-			dos.flush();
+			dos.flush();*/
+			///falta coger de dis 
+			byte[] img = new byte[260917];
+			dos.write(img);
 			System.out.println("Información enviada");
 			
 			dos.close();

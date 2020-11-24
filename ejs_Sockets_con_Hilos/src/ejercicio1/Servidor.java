@@ -1,35 +1,32 @@
 package ejercicio1;
-import java.io.*;
-import java.util.*;
+
 import java.net.*;
+import java.io.*;
+
 
 public class Servidor {
-public static final int PUERTO = 5000;
-	public static void main(String[] args) {
-		try {
-			FileReader fr;
-			BufferedReader lectura;
-			
-			ServerSocket servidor = new ServerSocket(PUERTO);
-			Socket cliente = servidor.accept();
-			
-			lectura = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
-			
-		
-			String cadena;
-		      FileReader f = new FileReader(lectura.readLine());
-		      BufferedReader b = new BufferedReader(f);
-		      while((cadena = b.readLine())!=null) {
-		          System.out.println(cadena);
-		      }
-		      b.close();
-			
-			cliente.close();
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		}
+public static final int PUERTO=5500;
 
+	public static void main(String[] args) {
+	ServerSocket servidor;
+	System.out.println("Iniciando server...");
+	
+	try {
+		servidor = new ServerSocket(PUERTO);
+		int cont=1;
+		while(true) {
+			Socket socket = servidor.accept();
+			System.out.println("Cliente nº"+cont+" conectando...");
+			HiloServidor h = new HiloServidor(socket,cont);
+			h.start();
+			cont++;
+			
+		}
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	}
 
 }

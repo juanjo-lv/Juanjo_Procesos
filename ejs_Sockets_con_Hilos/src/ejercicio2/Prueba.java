@@ -5,17 +5,25 @@ import java.io.*;
 public class Prueba {
 
 	public static void main(String[] args) {
-		String cad="";
-		try(DataInputStream dis = new DataInputStream(new FileInputStream("ejercicio2_archivos/archivo.dat"));){
+	 File f1 = new File("ejercicio2_archivos/prueba.obj");
+	 try {
+		DataOutputStream dos = new DataOutputStream (new FileOutputStream(f1));
+		DataInputStream dis = new DataInputStream (new FileInputStream(f1));
+		try {
+			dos.writeUTF("esto es una prueba de archivo binario para ejercicio 2 de la hoja de sockets con hilos");
+			dos.flush();
 			
-		while(dis.available()>0){
-			cad=dis.readUTF();
-			 System.out.print(cad+" ");
-		}
-		System.out.println(cad);
-		}catch(IOException e) {
+			while(dis.available()>0) {
+				System.out.println( dis.readUTF());
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 		
 	}
 

@@ -1,4 +1,4 @@
-package ejercicio1;
+package ejercicio2;
 
 import java.net.*;
 import java.util.Scanner;
@@ -30,11 +30,9 @@ public class Cliente extends Thread {
 			escribir = new PrintWriter(new OutputStreamWriter(miSocket.getOutputStream()),true);
 			leer = new BufferedReader(new FileReader(f));
 			
+			String texto = leer.readLine();
+			escribir.println(texto);
 			
-			String texto = "";
-			while((texto = leer.readLine())!=null) {
-				escribir.println(texto);
-			}
 			System.out.println("Información enviada");
 			
 			escribir.close();

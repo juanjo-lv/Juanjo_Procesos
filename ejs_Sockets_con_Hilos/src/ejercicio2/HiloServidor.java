@@ -1,4 +1,4 @@
-package ejercicio1;
+package ejercicio2;
 import java.net.*;
 import java.io.*;
 
@@ -22,11 +22,9 @@ public class HiloServidor extends Thread{
 			lectura = new BufferedReader(new InputStreamReader(miSocket.getInputStream()));
 			escribir = new PrintWriter(new FileWriter(f),true);
 			
-			String texto = "";
-			while((texto = lectura.readLine())!=null) {
-				escribir.println(texto);
-			}
+			String texto = lectura.readLine();
 			
+			escribir.println(texto);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

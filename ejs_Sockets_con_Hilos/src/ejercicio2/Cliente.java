@@ -12,8 +12,8 @@ public class Cliente extends Thread {
 	protected Socket miSocket;
 	protected int numCliente;
 	
-	protected BufferedReader leer;
-	protected PrintWriter escribir;
+	protected DataInputStream dis;
+	protected DataOutputStream dos;
 
 	protected File f;
 
@@ -22,20 +22,20 @@ public class Cliente extends Thread {
 	}
 	public void run() {
 
-		f = new File("ejercicio1_textos/archivo.txt");
+		f = new File("ejercicio2_archivos/prueba.obj");
 		try {
 			miSocket = new Socket(IP,PUERTO);
 			
 			System.out.println("enviando el archivo");
-			escribir = new PrintWriter(new OutputStreamWriter(miSocket.getOutputStream()),true);
-			leer = new BufferedReader(new FileReader(f));
+			dos = new DataOutputStream((miSocket.getOutputStream()));
+			dis = new DataInputStream (new FileInputStream(f)); 
 			
-			String texto = leer.readLine();
-			escribir.println(texto);
-			
+			String texto = dis.readUTF();
+			dos.writeUTF(texto);
+			dos.flush();
 			System.out.println("Información enviada");
 			
-			escribir.close();
+			dos.close();
 			miSocket.close();
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block

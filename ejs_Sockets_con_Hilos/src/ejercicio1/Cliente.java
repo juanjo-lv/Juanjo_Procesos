@@ -51,6 +51,8 @@ public class Cliente extends Thread {
 
 	public static void main(String[] args) {
 		
+		//Podría hacerlo con un lanzador pero aún me lia un poco y lo he dejado así me lo tengo que mirar más en profundidad
+		
 		int numCli;
 		Cliente cli;
 		

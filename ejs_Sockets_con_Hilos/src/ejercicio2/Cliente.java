@@ -22,20 +22,18 @@ public class Cliente extends Thread {
 	}
 	public void run() {
 
-		f = new File("ejercicio2_archivos/prueba.obj");
+		f = new File("ejercicio2_archivos/foto.jpeg");
 		try {
 			miSocket = new Socket(IP,PUERTO);
 			
 			System.out.println("enviando el archivo");
 			dos = new DataOutputStream((miSocket.getOutputStream()));
-			dis = new DataInputStream (new FileInputStream(f)); 
+			FileInputStream fis = new FileInputStream(f);
+			dis = new DataInputStream (fis); 
 			
-			/*String texto = dis.readUTF();
-			dos.writeUTF(texto);
-			dos.flush();*/
-			///falta coger de dis 
-			byte[] img = new byte[260917];
-			dos.write(img);
+			String ruta = "ejercicio2_archivos/foto.jpeg";
+			dos.writeUTF(ruta);
+			dos.flush();
 			System.out.println("Información enviada");
 			
 			dos.close();
@@ -52,9 +50,10 @@ public class Cliente extends Thread {
 
 	public static void main(String[] args) {
 		
+		//Podría hacerlo con un lanzador pero aún me lia un poco y lo he dejado así me lo tengo que mirar más en profundidad
+		
 		int numCli;
 		Cliente cli;
-		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduce el numero de clientes: ");
 		

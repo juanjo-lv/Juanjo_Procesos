@@ -1,4 +1,4 @@
-package ejercicio2;
+package ficheros;
 import java.awt.image.BufferedImage;
 import java.io.*;
 

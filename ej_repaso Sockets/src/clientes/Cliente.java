@@ -4,9 +4,9 @@ import java.io.*;
 import javax.swing.*;
 
 public class Cliente {
-	public static final String IP ="localhost";
-	public static final int PUERTO_HORA = 6000;
-	public static final int PUERTO_ECO = 6001;
+	public static final String IP ="127.0.0.1";
+	public static final int PUERTO_HORA = 5600;
+	public static final int PUERTO_ECO = 4000;
 	
 	private int id ;
 	private Socket socket;
@@ -55,8 +55,9 @@ public class Cliente {
 		con= conectar(IP,PUERTO_HORA);
 		try {
 			lectura = new BufferedReader(new InputStreamReader(con.getInputStream()));
-			while(lectura.readLine()!=null) {
-				System.out.println(lectura.readLine());
+			String leer;
+			while((leer=lectura.readLine())!=null) {
+				System.out.println(leer);
 			}
 			
 		} catch (IOException e) {

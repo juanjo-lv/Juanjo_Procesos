@@ -8,7 +8,7 @@ public class LanzaCliente {
 		ProcessBuilder pb;
 		try {
 			pb = new ProcessBuilder(
-					"java","-cp","bin",cli
+					"cmd","/c","start","cmd.exe","/k","java","-cp","bin",cli
 					);
 			pb.start();
 		}catch(Exception e) {

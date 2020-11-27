@@ -7,13 +7,15 @@ public class LanzaServidores {
 		ProcessBuilder pbEco,pbHora;
 		try {
 			pbEco = new ProcessBuilder(
-					"java","-cp","bin",servEco
+					"cmd","/c","start","cmd.exe","/k","java","-cp","bin",servEco
 					);
 			pbHora = new ProcessBuilder(
-					"java","-cp","bin",servHora
+					"cmd","/c","start","cmd.exe","/k","java","-cp","bin",servHora
 					);
 			pbEco.start();
+			System.out.println("cliente Eco lanzado");
 			pbHora.start();
+			System.out.println("cliente Hora lanzado");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

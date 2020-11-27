@@ -2,7 +2,7 @@ package servidores;
 import java.net.*;
 import java.io.*;
 public class ServidorEco {
-	public static final int PUERTO = 6500;
+	public static final int PUERTO = 4000;
 	
 	private static Socket socket;
 	private static ServerSocket servidor;

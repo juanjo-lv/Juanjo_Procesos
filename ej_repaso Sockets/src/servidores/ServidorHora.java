@@ -3,7 +3,7 @@ import java.io.*;
 import java.net.*;
 public class ServidorHora {
 	
-	public static final int PUERTO = 7000;
+	public static final int PUERTO = 5600;
 	
 	private static Socket conexion;
 	private static ServerSocket servidor;
@@ -18,6 +18,7 @@ public class ServidorHora {
 				HiloServHora h = new HiloServHora(conexion);
 				h.start();
 			}
+			
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

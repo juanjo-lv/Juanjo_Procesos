@@ -20,6 +20,7 @@ public class HiloServHora extends Thread{
 			
 			while(cont<20) {
 				escribir.println(LocalTime.now());
+				System.out.println("***************"+LocalTime.now());
 				cont++;
 				sleep(2000);
 			

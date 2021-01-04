@@ -26,10 +26,20 @@ public class Servidor{
 			 h.start();
 			 
 		 }
+		 
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	
+	}finally {
+		try {
+			conexion.close();		
+			conexion2.close();
+			servidor.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 		
 	}

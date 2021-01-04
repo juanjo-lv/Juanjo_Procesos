@@ -1,0 +1,9 @@
+Miliki "Hola Don Pepito ...", 
+	"Paso usted ya por casa ...",
+	"Vio usted a mi abuela",
+	"Adios Don Pepito";
+	
+Niños "Hola Don Jose ...", 
+	"Por su casa yo pase ...",
+	"A su abuela yo la vi ...",
+	"Adios Don Jose";

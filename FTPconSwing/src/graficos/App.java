@@ -1,3 +1,4 @@
+package graficos;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -60,6 +61,7 @@ public class App extends JFrame {
 		JButton boton3 = new JButton("Eliminar fichero");
 		boton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		boton3.setBounds(350, 222, 117, 36);

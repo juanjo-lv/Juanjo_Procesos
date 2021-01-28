@@ -1,5 +1,9 @@
+package graficos;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -7,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-
+import java.awt.*;
 public class Login extends JFrame {
 
 	private JPanel contentPane;
@@ -52,6 +56,7 @@ public class Login extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
+		
 		JLabel label2 = new JLabel("Usuario:");
 		label2.setBounds(34, 71, 53, 14);
 		contentPane.add(label2);
@@ -71,7 +76,25 @@ public class Login extends JFrame {
 		textField_2.setColumns(10);
 		
 		JButton boton_login = new JButton("Entrar");
+		boton_login.addActionListener(new ActionListener() {
+			  @Override
+			  public void actionPerformed(ActionEvent e) {
+			    String servidor = textField.getText();
+			    String user = textField_1.getText();
+			    String pass = textField_2.getText();
+			   
+			    codigoFTP.Servidor.conectarServer(servidor, user, pass, codigoFTP.Servidor.DIRECCION);   
+			    
+			  }
+
+
+			});
 		boton_login.setBounds(69, 193, 89, 23);
 		contentPane.add(boton_login);
+		
+		
+
+
 	}
 }
+

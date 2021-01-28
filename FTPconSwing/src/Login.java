@@ -44,7 +44,7 @@ public class Login extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel label1 = new JLabel("Servidor:");
-		label1.setBounds(34, 23, 108, 19);
+		label1.setBounds(34, 23, 53, 19);
 		contentPane.add(label1);
 		
 		textField = new JTextField();
@@ -53,11 +53,11 @@ public class Login extends JFrame {
 		textField.setColumns(10);
 		
 		JLabel label2 = new JLabel("Usuario:");
-		label2.setBounds(34, 71, 46, 14);
+		label2.setBounds(34, 71, 53, 14);
 		contentPane.add(label2);
 		
 		JLabel label3 = new JLabel("Clave:");
-		label3.setBounds(34, 116, 46, 14);
+		label3.setBounds(34, 116, 53, 14);
 		contentPane.add(label3);
 		
 		textField_1 = new JTextField();

@@ -4,11 +4,17 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.SocketException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.apache.commons.net.ftp.FTPClient;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.*;
@@ -83,7 +89,44 @@ public class Login extends JFrame {
 			    String user = textField_1.getText();
 			    String pass = textField_2.getText();
 			   
-			    codigoFTP.Servidor.conectarServer(servidor, user, pass, codigoFTP.Servidor.DIRECCION);   
+				try {
+					FTPClient cliente=new FTPClient();
+					cliente.connect(servidor);
+					cliente.enterLocalPassiveMode();
+					
+					boolean login = cliente.login(user, pass);
+					if(login) {
+						setVisible(false);
+						JOptionPane.showMessageDialog(null, "Conectado correctamente","validación",JOptionPane.INFORMATION_MESSAGE);
+						EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									App frame = new App(cliente,servidor,user,pass);
+									frame.setVisible(true);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						});
+						
+						
+					}else{
+						JOptionPane.showMessageDialog(null,"Error al iniciar la conexión FTP","Error crítico",JOptionPane.ERROR_MESSAGE);;
+						cliente.disconnect();
+						System.exit(1);
+					}
+					
+					
+				} catch (SocketException ex) {
+					JOptionPane.showMessageDialog(null,"Error al iniciar la conexión FTP","Error crítico",JOptionPane.ERROR_MESSAGE);;
+
+				 
+				} catch (IOException ex) {
+					
+					JOptionPane.showMessageDialog(null,"Error al iniciar la conexión FTP","Error crítico",JOptionPane.ERROR_MESSAGE);;
+					
+				}
+			    
 			    
 			  }
 

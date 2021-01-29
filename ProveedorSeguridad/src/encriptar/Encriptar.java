@@ -2,6 +2,7 @@ package encriptar;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -63,6 +64,16 @@ public class Encriptar {
 			return;
 		}
 		
+		FileOutputStream fichSalida = null;
+		try {
+			fichSalida = new FileOutputStream(nombreDestino);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch(Exception e){
+			e.printStackTrace();
+			return;
+		}
 		
 		
 	}

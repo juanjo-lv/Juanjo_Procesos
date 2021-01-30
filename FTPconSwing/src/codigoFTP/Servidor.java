@@ -1,12 +1,16 @@
 package codigoFTP;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.SocketException;
 import java.util.ArrayList;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import org.apache.commons.net.ftp.FTPClient;
@@ -18,17 +22,17 @@ import org.apache.commons.net.ftp.FTPFile;
 
 public class Servidor {
 	public static final String DIRECCION ="/";
-	
-	
+
+
 	public static ArrayList<String> cambiarListarDirectorio(String nombre, FTPClient cliente) {
 		ArrayList<String> listado = new ArrayList<String>();
 		try {
-			
+
 			String cad ="";
 			cliente.changeWorkingDirectory(nombre);
 			FTPFile[] ficheros = cliente.listFiles();
 			listado.add("DIRECTORIO ACTUAL : "+cliente.printWorkingDirectory());
-			for (int i = 1; i < ficheros.length; i++) {
+			for (int i = 0; i < ficheros.length; i++){
 				cad = ficheros[i].getName();
 				listado.add(cad);
 			}
@@ -38,29 +42,31 @@ public class Servidor {
 		}
 		return listado;
 	}
-	
-	
+
+
 	public static void borrarFichero(String direc,FTPClient cliente, String nombre) {
 		try {
 			cliente.changeWorkingDirectory(direc);
 			if(cliente.deleteFile(nombre)) {
-				System.out.println("fichero eliminado con exito");
+				JOptionPane.showMessageDialog(null,"fichero eliminado con exito");
+
 			}else {
-				System.out.println("No se ha podido borrar el fichero");
+				JOptionPane.showMessageDialog(null,"No se ha podido borrar el fichero" , "Error", JOptionPane.ERROR_MESSAGE);
+
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	public static void subirArchivo(FTPClient cliente,String ruta,String nombre) {
+	public static void subirArchivo(FTPClient cliente,File fich) {
 		try {
-			
+
 			BufferedInputStream in =
-					new BufferedInputStream(new FileInputStream(ruta));
+					new BufferedInputStream(new FileInputStream(fich));
 			try {
 				cliente.setFileType(cliente.BINARY_FILE_TYPE);
-				if(cliente.storeFile(nombre, in)) {
+				if(cliente.storeFile(fich.getName(), in)) {
 					JOptionPane.showMessageDialog(null, "Archivo subido");
 					in.close();
 				}else {
@@ -75,4 +81,74 @@ public class Servidor {
 			e.printStackTrace();
 		}
 	}
+	public static void crearCarpeta(FTPClient cliente) {
+		String nombreCarpeta;
+
+		nombreCarpeta=JOptionPane.showInputDialog("Nombre de la carpeta que quieres crear");
+		try {
+			if (cliente.makeDirectory(nombreCarpeta)) {
+				System.out.println("Directorio :  " + 
+						nombreCarpeta + " creado ...");
+
+			} else {
+				System.out.println("No se ha podido crear el Directorio");
+
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static void borrarCarpeta(String direc,FTPClient cliente, String nombre) {
+		try {
+			cliente.changeWorkingDirectory(direc);
+			if(cliente.removeDirectory(nombre)) {
+				JOptionPane.showMessageDialog(null,"Carpeta eliminada con exito");
+
+			}else {
+				JOptionPane.showMessageDialog(null,"No se ha podido borrar la carpeta" , "Error", JOptionPane.ERROR_MESSAGE);
+
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static void descargarFichero(FTPClient cliente, File fich, String destino){
+
+		try {
+			cliente.setFileType(cliente.BINARY_FILE_TYPE);
+			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(destino));
+			if(cliente.retrieveFile(destino, out)) {
+				System.out.println("bien");
+			}else {
+				System.out.println("mal");
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+	}
+	public static void descFichero(FTPClient cliente,String nombre,String nombrefich) {
+		File file;
+		String archivoyCarpetaDestino="";
+		String carpetaDestino ="";
+		
+		JFileChooser f = new JFileChooser();
+		f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		f.setDialogTitle("Selecciona el directorio donde DESCARGAR el fichero");
+		
+		int returnVal = f.showDialog(null, "Descargar");
+		if(returnVal == JFileChooser.APPROVE_OPTION) {
+			file = f.getSelectedFile();
+			carpetaDestino = (file.getAbsolutePath()).toString();
+			
+			cliente.setFileType(cliente.BINARY_FILE_TYPE);
+			
+		}
+	}
 }
+

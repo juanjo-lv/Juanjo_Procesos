@@ -156,8 +156,7 @@ public class App extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				File f1 = (File)panel.getSelectedValue();
-				codigoFTP.Servidor.descargarFichero(cliente, f1, desc().getName());
+				codigoFTP.Servidor.descFichero(cliente, (String)panel.getSelectedValue(),(String)panel.getSelectedValue());
 				
 				
 				
@@ -259,11 +258,5 @@ public class App extends JFrame {
 		codigoFTP.Servidor.subirArchivo(cliente, archivo);
 
 	}
-	public File desc() {
-		JFileChooser file=new JFileChooser();
-		file.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		file.showOpenDialog(this);
-		File archivo=file.getSelectedFile();
-		return archivo;
-	}
+
 }

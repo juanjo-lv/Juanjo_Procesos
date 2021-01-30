@@ -114,24 +114,6 @@ public class Servidor {
 			e.printStackTrace();
 		}
 	}
-	public static void descargarFichero(FTPClient cliente, File fich, String destino){
-
-		try {
-			cliente.setFileType(cliente.BINARY_FILE_TYPE);
-			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(destino));
-			if(cliente.retrieveFile(destino, out)) {
-				System.out.println("bien");
-			}else {
-				System.out.println("mal");
-			}
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-
-	}
 	public static void descFichero(FTPClient cliente,String nombre,String nombrefich) {
 		File file;
 		String archivoyCarpetaDestino="";
@@ -145,8 +127,19 @@ public class Servidor {
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
 			file = f.getSelectedFile();
 			carpetaDestino = (file.getAbsolutePath()).toString();
-			
-			cliente.setFileType(cliente.BINARY_FILE_TYPE);
+			archivoyCarpetaDestino = carpetaDestino+ File.separator+nombrefich;
+			try {
+				cliente.setFileType(cliente.BINARY_FILE_TYPE);
+				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(archivoyCarpetaDestino));
+				if(cliente.retrieveFile(nombre, out)) {
+					JOptionPane.showMessageDialog(null, "Archivo descargado con exito");
+				}else {
+					JOptionPane.showMessageDialog(null, "No se ha podido descargar el archivo","Error",JOptionPane.ERROR_MESSAGE);
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 	}

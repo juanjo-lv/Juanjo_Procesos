@@ -142,8 +142,8 @@ public class Encriptar {
 			streamEncriptado.close();
 			fichEntrada.close();
 			fichSalida.close();
-		}
-		catch (IOException ioe) {
+		}catch (IOException ioe){
+			
 		}
 
 	} // main

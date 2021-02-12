@@ -17,7 +17,6 @@ public class Servidor {
 		
 		try {
 			texto_encriptado=CifAES.encript(mensaje);
-			System.out.println(texto_encriptado);
 		} catch (Exception e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();

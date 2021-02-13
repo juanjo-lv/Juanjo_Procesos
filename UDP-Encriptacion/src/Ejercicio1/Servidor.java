@@ -1,49 +1,47 @@
 package Ejercicio1;
-
-import java.io.*;
 import java.net.*;
 public class Servidor {
 
 	public static void main(String[] args) {
-		DatagramSocket mySocket = null;
-		BufferedReader bf;
-		File f1 = new File("mensaje");
+	int puerto = 5000;
+	DatagramSocket socket= null;
+	DatagramPacket data = null;
+	DatagramPacket dataenvio = null;
+	byte[] buffer;
+	byte[] buffenvio;
+	try {
+		socket = new DatagramSocket(puerto);
+		buffer = new byte[1024];
+		data = new DatagramPacket(buffer,buffer.length);
 		
-		String ip = "localhost";
-		int puerto = 4000;
-		String mensaje="Recuerda bajar al perro el lunes a las 9 ";
-		String texto_encriptado="";
-		
-		
-		try {
-			texto_encriptado=CifAES.encript(mensaje);
-		} catch (Exception e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+		socket.receive(data);
 		
 		
+		String mensaje_recibido = new String(buffer).trim();
+		String mensaje_desencriptado = CifAES.decrypt(mensaje_recibido);
 		
-		try {
-			mySocket = new DatagramSocket();
-			InetAddress receiverHost = InetAddress.getByName(ip);
-			byte[] buffer = texto_encriptado.getBytes();
-			DatagramPacket datagram = new DatagramPacket(buffer, buffer.length,receiverHost,puerto);	
-			mySocket.send(datagram);
-		} catch (UnknownHostException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}catch(Exception e) {
-			
-		}finally {
-			System.out.println("Hemos terminado");
-			mySocket.close();
-		}
-	
-	
-	
+		int num = Integer.parseInt(mensaje_desencriptado);
+		String letra =Character.toString(calcularLetraArray(num));
+		
+		String dni = mensaje_desencriptado + letra;
+		String dni_encriptado = CifAES.encript(dni);
+		buffenvio = dni_encriptado.getBytes();
+		dataenvio = new DatagramPacket(buffenvio,buffenvio.length,data.getAddress(),data.getPort());
+		
+		socket.send(dataenvio);
 		
 		
+	} catch (SocketException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}catch(Exception e) {
+		e.printStackTrace();
 	}
+	}
+   public static char calcularLetraArray(int dni){
+        char caracteres[] = {'T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E'};
+        int resto = dni%23;
+        return caracteres[resto];
+   }
 
 }

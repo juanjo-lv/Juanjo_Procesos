@@ -1,14 +1,19 @@
 package Ejercicio1;
 
-import java.security.Key;
+import java.util.Arrays;
 import java.util.Base64;
 
-import javax.crypto.Cipher;
+import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
+
+import java.io.UnsupportedEncodingException;
+import java.security.*;
 
 public class CifAES {
 	public static final String ENCRYPT_KEY ="clave-coclave-co"; 
-	
+
+	//Algoritmo que convierte una cadena a AES
+
 	public static String encript(String text) throws Exception {  
 	    Key aesKey = new SecretKeySpec(ENCRYPT_KEY.getBytes(), "AES");
 	 
@@ -20,8 +25,7 @@ public class CifAES {
 	    //return Base64.getEncoder().encode(encrypted);
 	    return Base64.getEncoder().encodeToString(encrypted);
 	}
-	
-	private static String decrypt(String encrypted) throws Exception {
+	public static String decrypt(String encrypted) throws Exception {
 		
 	    byte[] encryptedBytes = Base64.getDecoder().decode(encrypted.replace("\n", ""));
 	         
@@ -34,4 +38,5 @@ public class CifAES {
 	         
 	    return decrypted;
 	    }
-}
+	
+}	

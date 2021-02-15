@@ -1,6 +1,7 @@
 package Ejercicio1;
 
 import java.net.*;
+import java.security.InvalidKeyException;
 
 import javax.swing.JOptionPane;
 public class Cliente {
@@ -14,11 +15,12 @@ public class Cliente {
 		DatagramSocket mySocket=null;
 		
 		try {
+			String clave = JOptionPane.showInputDialog("Introduce la clave AES");
 			InetAddress host = InetAddress.getByName(ip);
 		    mySocket = new DatagramSocket();
 	
-			String mensaje = JOptionPane.showInputDialog("Introduce tu DNI sin letra");
-			String mensaje_encriptado = CifAES.encript(mensaje);
+			String mensaje = introducirDni();
+			String mensaje_encriptado = CifAES.encript(mensaje,clave);
 			JOptionPane.showMessageDialog(null,"Encriptación completada tu mensaje es: "+mensaje_encriptado);
 			
 			byte[] buffer = mensaje_encriptado.getBytes();
@@ -35,7 +37,7 @@ public class Cliente {
 			String dni_encriptado = new String(buffrecogida).trim();
 			JOptionPane.showMessageDialog(null,"Recibiendo Dni completo encriptado..."+dni_encriptado);
 			
-			String dni_recuperado = CifAES.decrypt(dni_encriptado);
+			String dni_recuperado = CifAES.decrypt(dni_encriptado,clave);
 			JOptionPane.showMessageDialog(null,
 					"Un momento por favor...");
 			JOptionPane.showMessageDialog(null,
@@ -50,6 +52,25 @@ public class Cliente {
 			e.printStackTrace();
 		}
 
+	}
+	public static String introducirDni() {
+		int dni;
+		String cad;
+		boolean entero = false;
+		
+		do {
+			cad="";
+		    try{
+		    	dni = Integer.parseInt(JOptionPane.showInputDialog("introduce tu dni sin letra"));
+		    	cad = cad+dni;
+		        entero = true;
+		    }catch(NumberFormatException e){
+		        entero = false;
+		    }
+			
+		 }while(cad.length()<8 && cad.length()>8);
+		
+		return cad;
 	}
 
 }

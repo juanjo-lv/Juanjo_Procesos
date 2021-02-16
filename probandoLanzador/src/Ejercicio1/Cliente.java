@@ -4,7 +4,7 @@ import java.net.*;
 import java.security.InvalidKeyException;
 
 import javax.swing.JOptionPane;
-public class Cliente {
+public class Cliente{
 
 	public static void main(String[] args) {
 		String ip = "localhost";
@@ -15,19 +15,9 @@ public class Cliente {
 		DatagramSocket mySocket=null;
 		
 		try {
-			String clave="";
-			do {
-				 //forzar que la clave AES tenga 16 caracteres si se introducen menos o más da un error al inicializar el cifrador
-				
-				 clave = JOptionPane.showInputDialog("Introduce la clave AES");
-				 if(clave.length()!=16) {
-					 System.out.println("la clave tiene que ser de 16 caracteres");
-				 }
-			}while(clave.length()!=16);
-			
+			String clave = JOptionPane.showInputDialog("Introduce la clave AES");
 			InetAddress host = InetAddress.getByName(ip);
 		    mySocket = new DatagramSocket();
-		    System.out.println("Cliente UDP iniciado");
 	
 			String mensaje = introducirDni();
 			String mensaje_encriptado = CifAES.encript(mensaje,clave);
@@ -48,8 +38,10 @@ public class Cliente {
 			System.out.println("Recibiendo Dni completo encriptado..."+dni_encriptado);
 			
 			String dni_recuperado = CifAES.decrypt(dni_encriptado,clave);
-			System.out.println("Un momento por favor...");
-			System.out.println("su dni es :"+dni_recuperado);
+			System.out.println(
+					"Un momento por favor...");
+			System.out.println(
+					"su dni es :"+dni_recuperado);
 					
 			
 			

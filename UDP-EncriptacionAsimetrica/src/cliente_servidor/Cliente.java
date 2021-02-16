@@ -1,3 +1,4 @@
+package cliente_servidor;
 import java.io.IOException;
 import java.net.*;
 import java.security.InvalidKeyException;
@@ -59,7 +60,7 @@ public class Cliente {
 			 eleccion = JOptionPane.showInputDialog("Elige una opcion \n"
 					+ "1. factorial de un numero \n"
 					+ "2. Potencia de un numero \n"
-					+ "3 Ecuacion de segundo grado");
+					+ "3. Ecuacion de segundo grado");
 			}while(eleccion.equalsIgnoreCase("1") && eleccion.equalsIgnoreCase("2") && eleccion.equalsIgnoreCase("3"));
 			
 			byte[] buffer = encriptar(eleccion, publicaServ, rsa);
@@ -98,6 +99,7 @@ public class Cliente {
 					num2= JOptionPane.showInputDialog(null,"Introduce el exponente");
 				}while(!esNum(num));
 				
+				
 				buffer2 = encriptar(num, publicaServ, rsa);
 				dataEnviar = new DatagramPacket(buffer2, buffer2.length,host,PUERTO);
 				mySocket.send(dataEnviar);
@@ -110,7 +112,8 @@ public class Cliente {
 				dataRecibir = new DatagramPacket(buffer3,buffer3.length);
 				mySocket.receive(dataRecibir);
 			
-				 rsa2 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+				//me creo un cifrador diferente para cifrar y descifrar
+				rsa2 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
 				rsa2.init(Cipher.DECRYPT_MODE, privadaCliente);
 				
 			    sol = Servidor.desencriptar(buffer3, privadaCliente, rsa2);
@@ -123,13 +126,13 @@ public class Cliente {
 			     num2="";
 			     String num3="";
 				do {
-					num= JOptionPane.showInputDialog(null,"Introduce el valor de x^2");
+					num= JOptionPane.showInputDialog(null,"Introduce el coeficiente de x^2");
 				}while(!esNum(num));
 				do {
-					num2= JOptionPane.showInputDialog(null,"Introduce el valor de x");
+					num2= JOptionPane.showInputDialog(null,"Introduce el coeficiente de x");
 				}while(!esNum(num));
 				do {
-					num3= JOptionPane.showInputDialog(null,"Introduce el numero");
+					num3= JOptionPane.showInputDialog(null,"Introduce el valor independiente");
 				}while(!esNum(num));
 				
 				buffer2 = encriptar(num, publicaServ, rsa);

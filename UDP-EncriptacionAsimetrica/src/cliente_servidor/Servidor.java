@@ -1,3 +1,4 @@
+package cliente_servidor;
 import java.io.*;
 import java.net.*;
 import java.security.*;
@@ -57,10 +58,11 @@ public class Servidor {
 				dataRecibir = new DatagramPacket(buffer,buffer.length);
 				socket.receive(dataRecibir);
 				String texto_recibido = desencriptar(buffer, privadaServ, rsa);
-				System.out.println(texto_recibido);
-				switch(texto_recibido) {
 				
+				
+				switch(texto_recibido) {
 				case "1":
+					System.out.println("has elegido calcular el factorial");
 					buffer = new byte[256];
 					dataRecibir = new DatagramPacket(buffer,buffer.length);
 					socket.receive(dataRecibir);
@@ -80,6 +82,7 @@ public class Servidor {
 					
 					break;
 				case "2":
+					System.out.println("has elegido elevar un numero a una potencia");
 					buffer = new byte[256];
 					dataRecibir = new DatagramPacket(buffer,buffer.length);
 					socket.receive(dataRecibir);
@@ -103,9 +106,10 @@ public class Servidor {
 				
 					break;
 				case "3":	
+					System.out.println("has elegido calcular la ecuación de segundo grado");
 					buffer = new byte[256];
 					dataRecibir = new DatagramPacket(buffer,buffer.length);
-					socket.receive(dataRecibir);
+					socket.receive(dataRecibir); 
 				    cad1= desencriptar(buffer, privadaServ, rsa);
 					
 				    buffer= new byte[256];

@@ -17,7 +17,7 @@ public class Servidor {
 	
 	try {
 		socket = new DatagramSocket(puerto);
-		
+		System.out.println("Servidor UDP iniciado");
 		while(true) {
 		
 		buffer = new byte[1024];
@@ -27,13 +27,21 @@ public class Servidor {
 		
 		
 		String mensaje_recibido = new String(buffer).trim();
+		System.out.println("Mensaje del cliente recibido: "+mensaje_recibido);
+		System.out.println("Encriptando...");
+		System.out.println("Encriptacion completada");
 		String mensaje_desencriptado = CifAES.decrypt(mensaje_recibido,clave);
+		System.out.println("El mensaje es: "+mensaje_desencriptado);
+		
 		
 		int num = Integer.parseInt(mensaje_desencriptado);
 		String letra =Character.toString(calcularLetraArray(num));
 		
 		String dni = mensaje_desencriptado + letra;
+		System.out.println("Calculando dni....");
+		System.out.println("El dni que se enviará es: "+dni);
 		String dni_encriptado = CifAES.encript(dni,clave);
+		System.out.println("Resultado encriptado: "+dni_encriptado);
 		buffenvio = dni_encriptado.getBytes();
 		dataenvio = new DatagramPacket(buffenvio,buffenvio.length,data.getAddress(),data.getPort());
 		

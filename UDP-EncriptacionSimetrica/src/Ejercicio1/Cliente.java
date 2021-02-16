@@ -9,7 +9,7 @@ public class Cliente {
 	public static void main(String[] args) {
 		String ip = "localhost";
 		int puerto = 5000;
-				;
+				
 		DatagramPacket data=null;
 		DatagramPacket datavuelta = null;
 		DatagramSocket mySocket=null;

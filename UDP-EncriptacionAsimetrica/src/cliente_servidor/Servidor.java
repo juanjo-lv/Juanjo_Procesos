@@ -96,7 +96,7 @@ public class Servidor {
 				    Double d2 = Double.parseDouble(cad2);
 				    Double resul = Math.pow(d1, d2);
 				    String resultado = Double.toString(resul);
-				    
+				    System.out.println("Procesando los datos...");
 				    			
 					rsa2 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
 					rsa2.init(Cipher.ENCRYPT_MODE, publicaCliente);
@@ -125,7 +125,7 @@ public class Servidor {
 				    Double a = Double.parseDouble(cad1);
 				    Double b = Double.parseDouble(cad2);
 				    Double c = Double.parseDouble(cad3);
-				    System.out.println(cad1+" "+cad2+" "+cad3);
+				    System.out.println("Procesando los datos...");
 				    String solucion ="";
 				    
 				    

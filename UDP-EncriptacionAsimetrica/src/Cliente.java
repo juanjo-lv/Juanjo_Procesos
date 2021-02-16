@@ -46,11 +46,15 @@ public class Cliente {
 			dataRecibir = new DatagramPacket(recibirpublica,recibirpublica.length);
 			mySocket.receive(dataRecibir);
 			publicaServ = KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(recibirpublica));
+			
+			//Llega la clave publica del Servidor, se usará para descifrar en el cliente
+			System.out.println("La clave pública del Servidor es");
 			System.out.println(publicaServ);
 			
 			//se inicia el cifrador con la clave publica del servidor 
 			rsa.init(Cipher.ENCRYPT_MODE, publicaServ);
 			String eleccion ="";
+			
 			do {
 			 eleccion = JOptionPane.showInputDialog("Elige una opcion \n"
 					+ "1. factorial de un numero \n"

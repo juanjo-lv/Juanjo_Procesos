@@ -37,11 +37,13 @@ public class Servidor {
 				// guardar claves en ficheros
 				//esto si voy sobrao después
 
-				/*recibir clave del cliente*/
+				/*recibir clave del cliente, usa para encriptar en el servidor*/
 				buffer = new byte[2048];
 				dataRecibir = new DatagramPacket(buffer,buffer.length);
 				socket.receive(dataRecibir);
 				publicaCliente = KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(buffer));
+			
+				System.out.println("La clave publica del Cliente es:");
 				System.out.println(publicaCliente);
 				
 				

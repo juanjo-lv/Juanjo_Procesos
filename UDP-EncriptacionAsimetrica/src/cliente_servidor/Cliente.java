@@ -30,8 +30,10 @@ public class Cliente {
 		KeyPairGenerator kpg;
 		KeyPair kp;
 		 try {
-			 InetAddress host = InetAddress.getByName(IP);
+			 
+			InetAddress host = InetAddress.getByName(IP);
 			mySocket = new DatagramSocket();
+			System.out.println("Cliente iniciado");
 			kpg = KeyPairGenerator.getInstance("RSA");
 			kp = kpg.generateKeyPair();
 			publicaCliente = kp.getPublic();

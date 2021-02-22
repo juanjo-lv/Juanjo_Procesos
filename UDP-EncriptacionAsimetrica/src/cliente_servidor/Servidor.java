@@ -19,6 +19,7 @@ public class Servidor {
 
 		try {
 			socket = new DatagramSocket(puerto);
+			System.out.println("Servidor iniciado");
 			KeyPairGenerator kpg;
 			KeyPair kp;
 
@@ -136,7 +137,7 @@ public class Servidor {
 				        if(solucion1.equalsIgnoreCase("NaN") && solucion2.equalsIgnoreCase("NaN")) {
 				        	solucion = "La ecuacion no tiene solucion en el conjunto de  R";
 				        }else {
-				        	solucion = "la solucion es +"+x1+" y -"+x2;
+				        	solucion = "la solucion es "+x1+" y "+x2;
 				        }
 				        
 					rsa2 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
